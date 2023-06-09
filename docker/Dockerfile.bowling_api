@@ -7,7 +7,7 @@ COPY go.mod go.sum ./
 # Download them
 RUN go mod download
 # Move the go files here
-COPY *.go ./
+ADD ./bin/api.tgz ./
 # Build it
 RUN CGO_ENABLED=0 GOOS=linux go build -o /bowlingapi
 

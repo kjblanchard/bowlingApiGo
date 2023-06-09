@@ -42,3 +42,6 @@ Temporary Items
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Binary files
+*.tgz
