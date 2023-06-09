@@ -1,0 +1,5 @@
+services:
+  api:
+    image: enf3rno/bowling_api:latest
+    ports:
+      - "8000:8000"
