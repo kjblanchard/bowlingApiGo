@@ -8,14 +8,9 @@ import (
 )
 
 func main() {
-	// we will implement these handlers in the next sections
-	http.HandleFunc("/signin", handlers.Signin)
-	http.HandleFunc("/welcome", handlers.Welcome)
-	http.HandleFunc("/refresh", handlers.Refresh)
-	http.HandleFunc("/logout", handlers.Logout)
-
-	// start the server on port 8000
+	http.HandleFunc("/api/v1/signin", handlers.Signin)
+	http.HandleFunc("/api/v1/welcome", handlers.Welcome)
+	http.HandleFunc("/api/v1/refresh", handlers.Refresh)
+	http.HandleFunc("/api/v1/logout", handlers.Logout)
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
-
-// var jwtKey = []byte("my_secret_key")
