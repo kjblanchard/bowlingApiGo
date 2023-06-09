@@ -10,3 +10,4 @@
 ### Description
 - Track your bowling scores over time to see your progress
 - Web api that can be parsed from other apps as well
+- Makefile for local development testing.

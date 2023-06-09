@@ -1,4 +1,8 @@
 services:
+  frontend:
+    image: enf3rno/bowling_frontend:latest
+    ports:
+    - 8080:8080
   api:
     image: enf3rno/bowling_api:latest
     ports:

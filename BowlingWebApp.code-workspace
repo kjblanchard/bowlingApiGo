@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "BowlingWebApp",
+			"path": "."
+		},
+		{
+			"name": "src",
+			"path": "api/src"
+		},
+		{
+			"name": "src",
+			"path": "frontend/src"
+		}
+	],
+	"settings": {}
+}
