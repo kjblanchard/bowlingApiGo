@@ -22,7 +22,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		Title: "Bowling",
 		Body:  "What",
 	}
-	err := templates.ExecuteTemplate(w, "new.html", data)
+	err := templates.ExecuteTemplate(w, "homepage.html", data)
 	if err != nil {
 		log.Printf("Something happened:\n %s", err.Error())
 		fmt.Fprintf(w, "Borked")
@@ -39,5 +39,7 @@ func loadTemplates() {
 func main() {
 	loadTemplates()
 	http.HandleFunc("/", handler)
+	// http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

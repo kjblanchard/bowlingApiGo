@@ -3,7 +3,7 @@ FROM golang:1.19 AS build-stage
 # Make the /app folder and cd into it
 WORKDIR /app
 # Get our go modules so that we can install them
-COPY go.mod ./
+COPY ./src/go.mod ./
 # Download them
 RUN go mod download
 # Move the go files here
@@ -12,10 +12,14 @@ ADD ./bin/frontend.tgz ./
 RUN CGO_ENABLED=0 GOOS=linux go build -o /frontend
 
 # Deploy the application binary into a lean image
-FROM gcr.io/distroless/base-debian11 AS build-release-stage
-WORKDIR /
-COPY --from=build-stage /frontend /frontend
-COPY ./templates /templates
+# FROM gcr.io/distroless/base-debian11 AS build-release-stage
+# Use this for debugging as it has sh and bash
+FROM debian:buster-slim AS build-release-stage
+WORKDIR /app
+COPY --from=build-stage /frontend /app
+COPY ./templates /app/templates
+COPY ../static /app/static
 EXPOSE 8080
-USER nonroot:nonroot
-ENTRYPOINT ["/frontend"]
+# Use this for prod
+# USER nonroot:nonroot
+ENTRYPOINT ["/app/frontend"]
