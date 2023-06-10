@@ -1,17 +1,16 @@
-function login() {
+function login(username, password) {
     fetch('http://localhost:8000/api/v1/signin', {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "username": "user1", "password": "password1" }),
-        credentials: 'include',
+        body: JSON.stringify({ "username": username, "password": password }),
     })
     .then(response => document.cookie = response.cookie)
-        // .then(response => response.json())
-        // .then(response => console.log(JSON.stringify(response)))
 }
+
 function checkLogin() {
     fetch('http://localhost:8000/api/v1/welcome', {
         method: 'GET',
@@ -23,22 +22,20 @@ function checkLogin() {
     })
 
 }
-// function loginForm(data) {
-//     console.log("hi")
-//     console.log(data)
-// }
 
 function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
-    console.log(formProps)
-    console.log(formData)
+    formValidation()
+    login(formProps.username, formProps.password)
+    loginForm.style.display = "none"
   }
 
-document.getElementById("login").onclick = login;
-document.getElementById("request").onclick = checkLogin;
-// document.getElementById("loginsubmitbutton").onclick = loginForm;
+function formValidation() {
 
+}
+
+document.getElementById("request").onclick = checkLogin;
 const loginForm = document.getElementById("loginform");
 loginForm.addEventListener("submit", handleSubmit)
