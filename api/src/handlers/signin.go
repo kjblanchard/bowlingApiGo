@@ -6,11 +6,13 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/kjblanchard/BowlingWebApp/helpers"
 	"github.com/kjblanchard/BowlingWebApp/models"
 )
 
 func Signin(w http.ResponseWriter, r *http.Request) {
 	var creds models.Credentials
+	helpers.EnableCors(&w)
 	// Get the JSON body and decode into credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {
