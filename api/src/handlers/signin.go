@@ -12,12 +12,7 @@ import (
 
 func Signin(w http.ResponseWriter, r *http.Request) {
 	var creds models.Credentials
-	helpers.EnableCors(&w)
-	// Set response headers. TO help with browser?
-	w.Header().Set("Access-Control-Allow-Credentials", "true")
-	w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
-	w.Header().Set("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+	helpers.EnableCors(&w, r)
 	// Get the JSON body and decode into credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {
@@ -29,9 +24,6 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 	// Get the expected password from our in memory map
 	expectedPassword, ok := models.Users[creds.Username]
 
-	// If a password exists for the given user
-	// AND, if it is the same as the password we received, the we can move ahead
-	// if NOT, then we return an "Unauthorized" status
 	if !ok || expectedPassword != creds.Password {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
@@ -65,10 +57,6 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		Name:    "token",
 		Value:   tokenString,
 		Expires: expirationTime,
-		// Path:    "/api/v1",
-		Path: "/",
-		// HttpOnly: true,
-		// Secure:   true,
-		// SameSite: http.SameSiteLaxMode,
+		Path:    "/",
 	})
 }

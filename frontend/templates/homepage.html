@@ -12,6 +12,13 @@
   <body>
     <main>
         <h1>Welcome to My Website: {{.Title}}</h1>
+        <form id="loginform" method="get">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username"><br><br>
+          <label for="password">Password:</label>
+          <input type="text" id="password" name="password"><br><br>
+          <input type="submit" id="loginsubmitbutton" value="Submit">
+        </form>
         <button type="button" id="login">Login</button>
         <button type="button" id="request">CheckLogin</button>
     </main>

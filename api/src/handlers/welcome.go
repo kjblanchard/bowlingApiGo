@@ -13,11 +13,7 @@ var jwtKey = []byte("my_secret_key")
 
 func Welcome(w http.ResponseWriter, r *http.Request) {
 	// We can obtain the session token from the requests cookies, which come with every request
-	helpers.EnableCors(&w)
-	w.Header().Set("Access-Control-Allow-Credentials", "true")
-	w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
-	w.Header().Set("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+	helpers.EnableCors(&w, r)
 	c, err := r.Cookie("token")
 	if err != nil {
 		if err == http.ErrNoCookie {

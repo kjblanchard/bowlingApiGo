@@ -23,6 +23,22 @@ function checkLogin() {
     })
 
 }
+// function loginForm(data) {
+//     console.log("hi")
+//     console.log(data)
+// }
+
+function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formProps = Object.fromEntries(formData);
+    console.log(formProps)
+    console.log(formData)
+  }
 
 document.getElementById("login").onclick = login;
 document.getElementById("request").onclick = checkLogin;
+// document.getElementById("loginsubmitbutton").onclick = loginForm;
+
+const loginForm = document.getElementById("loginform");
+loginForm.addEventListener("submit", handleSubmit)
