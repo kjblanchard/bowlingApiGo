@@ -13,6 +13,11 @@ import (
 func Signin(w http.ResponseWriter, r *http.Request) {
 	var creds models.Credentials
 	helpers.EnableCors(&w)
+	// Set response headers. TO help with browser?
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
+	w.Header().Set("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	// Get the JSON body and decode into credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {
@@ -60,5 +65,10 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		Name:    "token",
 		Value:   tokenString,
 		Expires: expirationTime,
+		// Path:    "/api/v1",
+		Path: "/",
+		// HttpOnly: true,
+		// Secure:   true,
+		// SameSite: http.SameSiteLaxMode,
 	})
 }

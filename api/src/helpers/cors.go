@@ -2,7 +2,7 @@ package helpers
 
 import "net/http"
 
-// var enabledWebsites = "*"
+// If you use * here it will allow from all sites.
 var enabledWebsites = "http://localhost:8080"
 
 func EnableCors(w *http.ResponseWriter) {
