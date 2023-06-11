@@ -39,7 +39,6 @@ func loadTemplates() {
 func main() {
 	loadTemplates()
 	http.HandleFunc("/", handler)
-	// http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

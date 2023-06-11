@@ -1,5 +1,5 @@
 function login(username, password) {
-    fetch('http://localhost:8000/api/v1/signin', {
+    fetch('http://bowling.supergoon.com:8000/api/v1/signin', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -12,7 +12,7 @@ function login(username, password) {
 }
 
 function checkLogin() {
-    fetch('http://localhost:8000/api/v1/welcome', {
+    fetch('http://bowling.supergoon.com:8000/api/v1/welcome', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
