@@ -12,6 +12,7 @@ import (
 
 func Signin(w http.ResponseWriter, r *http.Request) {
 	var creds models.Credentials
+	helpers.Connect()
 	helpers.EnableCors(&w, r)
 	// Get the JSON body and decode into credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
