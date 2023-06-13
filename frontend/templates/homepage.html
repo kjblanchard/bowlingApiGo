@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website: {{.Title}}</title>
-    <!-- <link rel="stylesheet" href="./style.css"> -->
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <main>
-        <h1>Welcome to My Website: {{.Title}}</h1>
-        <form id="loginform" method="get">
-          <div>
-            <span id="usernameValidation" style="color:blue"> </span>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username"><br><br>
-          </div>
-          <label for="password">Password:</label>
-          <input type="text" id="password" name="password"><br><br>
-          <input type="submit" id="loginsubmitbutton" value="Login">
-        </form>
-        <button type="button" id="request">CheckLogin</button>
-    </main>
-	<script src="/static/js/homepage.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Website: {{.Title}}</title>
+  <!-- <link rel="stylesheet" href="./style.css"> -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <main>
+    <h1>Welcome to My Website: {{.Title}}</h1>
+    <form id="loginform" method="get">
+      <div>
+        <span id="usernameValidation" style="color:red"> </span>
+        <br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+      </div>
+      <div>
+        <span id="passwordValidation" style="color:red"> </span>
+        <br>
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password"><br><br>
+        <input type="submit" id="loginsubmitbutton" value="Login">
+      </div>
+    </form>
+    <button type="button" id="request">CheckLogin</button>
+  </main>
+  <script src="/static/js/homepage.js"></script>
+</body>
+
 </html>
