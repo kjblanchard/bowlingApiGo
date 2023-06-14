@@ -4,8 +4,23 @@
 const usernameInputId = "username"
 const usernameValidationId = "usernameValidation"
 const passwordValidationId = "passwordValidation"
-// Regex
-const usernameRegex = /^\S{1,24}$/gm
+/**
+ * Validation function object, used when iterating through the things we need regex for.
+ */
+const validationMap = {
+    username: {
+        regex: /^\S{1,24}$/,
+        validString: "",
+        invalidString: "Invalid Username, 1-24 characters and no spaces",
+        getSpan: () => {return usernameSpan}
+    },
+    password: {
+        regex: /^\S{1,24}$/,
+        validString: "",
+        invalidString: "Invalid Password, 1-24 characters and no spaces",
+        getSpan: () => {return passwordSpan}
+    }
+}
 // // // // // // //
 
 function login(username, password) {
@@ -50,33 +65,30 @@ function handleSubmit(e) {
 function formValidation(formData) {
     let username = formData.username
     let password = formData.password
-    let consoleString = "Username: " + username + "\nPassword: " + password
-    let usernameTest = usernameInputValid(username)
-    if (!usernameTest) {
-        return false
+    let usernameTest = regexTest(username, "username")
+    let passwordTest = regexTest(password, "password")
+    if (usernameTest && passwordTest) {
+        return true
     }
-    console.log(consoleString)
+    return false
 }
 
-function usernameInputValid(usernameText) {
-    let isMatched = usernameRegex.test(usernameText)
-    if (!isMatched) {
-        usernameSpan.innerHTML = "Invalid Username: less than 24 characters without spaces"
-    }
-    else {
-        usernameSpan.innerHTML = ""
-    }
+function regexTest(stringText, testKey)  {
+    testObjectValues = validationMap[testKey]
+    console.log("Testing value: " + stringText)
+    let isMatched = testObjectValues.regex.test(stringText)
+    console.log("Match: ", + isMatched)
+    testObjectValues.getSpan().innerHTML = (isMatched) ? "" : "Invalid Password: 1-24 Chars without spaces"
     return isMatched
 }
 
 // // // //
 // On page load
 // // // //
-const usernameInput = document.getElementById(usernameInputId);
 const usernameSpan = document.getElementById(usernameValidationId)
+const passwordSpan = document.getElementById(passwordValidationId)
 
 document.getElementById("request").onclick = checkLogin;
 const loginForm = document.getElementById("loginform");
 loginForm.addEventListener("submit", handleSubmit)
-usernameInputValid()
 // // // //

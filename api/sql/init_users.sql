@@ -1,3 +1,4 @@
+-- Used to initialize data into the db
 INSERT INTO users
   (username, password_hash, email)
 VALUES
