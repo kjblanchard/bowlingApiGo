@@ -10,6 +10,9 @@ import (
 	"github.com/kjblanchard/BowlingWebApp/models"
 )
 
+// This is also used in helpers, so probably move it somewhere they both can access it.
+var jwtKey = []byte("my_secret_key")
+
 func Signin(w http.ResponseWriter, r *http.Request) {
 	var creds models.Credentials
 	helpers.EnableCors(&w, r)
@@ -35,6 +38,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 	// Create the JWT claims, which includes the username and expiry time
 	claims := &models.Claims{
 		Username: creds.Username,
+		UserId:   int(user.ID),
 		RegisteredClaims: jwt.RegisteredClaims{
 			// In JWT, the expiry time is expressed as unix milliseconds
 			ExpiresAt: jwt.NewNumericDate(expirationTime),
