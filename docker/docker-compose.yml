@@ -19,18 +19,5 @@ services:
       MYSQL_ROOT_PASSWORD: example
     volumes:
       - my-datavolume:/var/lib/mysql
-  # mysqlcli:
-  #   image: mysql
-  #   restart: always
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: example
-  #   ports:
-  #     - 8081:8080
-      # Used for webui gui
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8081:8080
 volumes:
   my-datavolume:

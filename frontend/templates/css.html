@@ -1,0 +1,6 @@
+<!-- Pass a list of strings in here, and it will loop over and add a css script block for each of them -->
+{{define "css"}}
+{{range .}}
+  <link rel="stylesheet" href="/static/css/{{.}}">
+    {{end}}
+{{end}}

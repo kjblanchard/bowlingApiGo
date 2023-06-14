@@ -9,8 +9,9 @@ import (
 
 // Template data we will pass into the templates
 type TemplateData struct {
-	Title string
-	Body  string
+	Title       string
+	ScriptFiles []string
+	CssFiles []string
 }
 
 // The cached templates
@@ -20,20 +21,23 @@ var templates *template.Template
 func handler(w http.ResponseWriter, r *http.Request) {
 	data := TemplateData{
 		Title: "Bowling",
-		Body:  "What",
+		ScriptFiles: []string{
+			"login.js",
+			"homepage.js",
+			"addScore.js",
+		},
+		CssFiles: []string{},
 	}
 	err := templates.ExecuteTemplate(w, "homepage.html", data)
 	if err != nil {
 		log.Printf("Something happened:\n %s", err.Error())
-		fmt.Fprintf(w, "Borked")
+		fmt.Fprintf(w, "Failed to load template content properly.")
 	}
-
-	// loadedTemplate.Execute(w, data)
 }
 
-// Load all templates from disk into a cached template file.
 func loadTemplates() {
-	templates = template.Must(template.ParseFiles("templates/homepage.html", "templates/new.html"))
+	// Load all the templates from disk into a pointer, and panics if it cannot be loaded.
+	templates = template.Must(template.ParseGlob("templates/*.html"))
 }
 
 func main() {

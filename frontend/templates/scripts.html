@@ -1,0 +1,6 @@
+<!-- Pass a list of strings in here, and it will loop over and add a js script block for each of them -->
+{{define "scripts"}}
+{{range .}}
+  <script src="/static/js/{{.}}"></script>
+    {{end}}
+{{end}}
