@@ -1,18 +1,17 @@
 {{define "login"}}
 <form id="loginform" method="get">
   <div>
-    <span id="usernameValidation" style="color:red"> </span>
-    <br>
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username"><br><br>
+    <input type="text" id="username" name="username">
+    <span id="usernameValidation" style="color:red"> </span>
   </div>
   <div>
-    <span id="passwordValidation" style="color:red"> </span>
-    <br>
     <label for="password">Password:</label>
-    <input type="text" id="password" name="password"><br><br>
+    <input type="text" id="password" name="password">
+    <span id="passwordValidation" style="color:red"> </span>
+  </div>
+  <div>
     <input type="submit" id="loginsubmitbutton" value="Login">
   </div>
 </form>
-<button type="button" id="request">CheckLogin</button>
 {{end}}

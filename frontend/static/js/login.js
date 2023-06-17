@@ -36,18 +36,6 @@ function login(username, password) {
         .then(response => document.cookie = response.cookie)
 }
 
-function checkLogin() {
-    fetch('http://bowling.supergoon.com:8000/api/v1/welcome', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-    })
-
-}
-
 function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -56,11 +44,8 @@ function handleSubmit(e) {
     let valid = formValidation(formProperties)
     if (valid) {
         login(formProperties.username, formProperties.password)
-        // Make it invisible after logging in.
-        // loginForm.style.display = "none"
     }
 }
-
 
 function formValidation(formData) {
     let username = formData.username
@@ -75,10 +60,8 @@ function formValidation(formData) {
 
 function regexTest(stringText, testKey)  {
     testObjectValues = validationMap[testKey]
-    console.log("Testing value: " + stringText)
     let isMatched = testObjectValues.regex.test(stringText)
-    console.log("Match: ", + isMatched)
-    testObjectValues.getSpan().innerHTML = (isMatched) ? "" : "Invalid Password: 1-24 Chars without spaces"
+    testObjectValues.getSpan().innerHTML = (isMatched) ? testObjectValues.validString : testObjectValues.invalidString
     return isMatched
 }
 
@@ -87,9 +70,6 @@ function regexTest(stringText, testKey)  {
 // // // //
 const usernameSpan = document.getElementById(usernameValidationId)
 const passwordSpan = document.getElementById(passwordValidationId)
-// userid is set when a user logs in, and is referenced in future calls to the backend
-let userId = null
-document.getElementById("request").onclick = checkLogin;
 const loginForm = document.getElementById("loginform");
 loginForm.addEventListener("submit", handleSubmit)
 // // // //

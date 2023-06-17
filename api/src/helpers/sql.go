@@ -10,6 +10,17 @@ import (
 	"github.com/kjblanchard/BowlingWebApp/models"
 )
 
+func QueryDb(query string, args ...any) (*sql.Rows, error) {
+	db, _ := Connect()
+	defer db.Close()
+	rows, err := db.Query(query, args...)
+	if err != nil {
+		return nil, fmt.Errorf("Failed on query: %v", err)
+	}
+	fmt.Println("Connection complete")
+	return rows, nil
+}
+
 func Connect() (*sql.DB, error) {
 	// Capture connection properties.
 	cfg := mysql.Config{
@@ -49,8 +60,26 @@ func GetUserByName(username string) (*models.User, error) {
 		if err := rows.Scan(&user.ID, &user.Username, &user.Password_hash, &user.Email); err != nil {
 			return nil, fmt.Errorf("Failed scanning %q: %v", username, err)
 		}
-		fmt.Printf("User found: Username: %s\nEmail: %s", user.Username, user.Email)
+		fmt.Printf("User found: Username: %s\nEmail: %s\n", user.Username, user.Email)
 		return &user, nil
 	}
 	return nil, fmt.Errorf("Failed to find user %q", username)
+}
+
+func AddScore(userId int, score int) (*models.Game, error) {
+	rows, error := QueryDb("insert into games (userId, score) values (?, ?)", userId, score)
+	if error != nil {
+		return nil, fmt.Errorf("Failed querying db somehow: %v", error)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var game models.Game
+		err := rows.Scan(nil, &game.UserId, &game.Score)
+		if err != nil {
+			return nil, fmt.Errorf("Failed scanning game : %v", err)
+		}
+		return &game, nil
+	}
+	return nil, fmt.Errorf("Failed to add game for userId: %d", userId)
+
 }

@@ -10,7 +10,7 @@ function handleAddScoreSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formProperties = Object.fromEntries(formData);
-    let score = formData.score
+    let score = parseInt(formProperties.score)
     let valid = addScoreSubmitValidation(score)
     if (valid) {
         addScore(score)
@@ -23,16 +23,18 @@ function addScoreSubmitValidation(score) {
     return valid
 }
 
-function addScore(score, userId) {
-    // fetch('http://bowling.supergoon.com:8000/api/v1/users/' + userId + '/scores', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     credentials: 'include',
-    //     body: JSON.stringify({ "score": score }),
-    // })
+function addScore(score) {
+    body = JSON.stringify({"score": score})
+    console.log(body)
+    fetch('http://bowling.supergoon.com:8000/api/v1/scores', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: body,
+    })
 }
 
 // // // //
