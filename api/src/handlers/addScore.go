@@ -41,7 +41,7 @@ func AddScore(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println("No")
-	game, error := helpers.AddScore(userId, 11)
+	game, error := helpers.AddScore(userId, score.Score)
 	if error != nil {
 		log.Printf("Failure with error %s", error)
 		fmt.Printf("Failed to add score: %v", error)

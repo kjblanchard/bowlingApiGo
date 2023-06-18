@@ -5,9 +5,11 @@ import (
 	"net/http"
 
 	"github.com/kjblanchard/BowlingWebApp/handlers"
+	"github.com/kjblanchard/BowlingWebApp/helpers"
 )
 
 func main() {
+	helpers.Connect()
 	http.HandleFunc("/api/v1/signin", handlers.Signin)
 	http.HandleFunc("/api/v1/welcome", handlers.Welcome)
 	http.HandleFunc("/api/v1/refresh", handlers.Refresh)

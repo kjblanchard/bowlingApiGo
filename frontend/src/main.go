@@ -35,8 +35,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func loadTemplates() {
 	// Load all the templates from disk into a pointer, and panics if it cannot be loaded.
+func loadTemplates() {
 	templates = template.Must(template.ParseGlob("templates/*.html"))
 }
 
